@@ -1,0 +1,62 @@
+version: "2.1"
+
+services:
+    nginx:
+        container_name: nginx
+        image: requirements/nginx
+        build: requirements/nginx
+        depends_on:
+            - "wordpress"
+        ports:
+            - "443:443"
+        volumes:
+            - pages:/var/www/html
+        networks:
+            - network
+        restart: always
+
+    mariadb:
+        container_name: mariadb
+        env_file:
+            - .env
+        image: requirements/db
+        build: requirements/mariadb
+        ports:
+            - "3306:3306"
+        volumes:
+            - db:/var/lib/mysql
+        networks:
+            - network
+        restart: always
+
+    wordpress:
+        container_name: wordpress
+        image: requirements/wordpress
+        build: requirements/wordpress
+        depends_on:
+            - mariadb # condition: service_healthy
+        volumes:
+            - pages:/var/www/html
+        env_file:
+            - .env
+        networks:
+            - network
+        restart: always
+
+networks:
+    network:
+        driver: bridge
+
+volumes:
+    pages:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/kkohki/data/wordpress
+    db:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/kkohki/data/mysql
