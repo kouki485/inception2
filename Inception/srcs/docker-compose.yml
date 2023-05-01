@@ -34,7 +34,7 @@ services:
         image: requirements/wordpress
         build: requirements/wordpress
         depends_on:
-            - mariadb # condition: service_healthy
+            - mariadb 
         volumes:
             - pages:/var/www/html
         env_file:

@@ -21,9 +21,6 @@ down:
 	-docker-compose -f ./srcs/docker-compose.yml down
 	make remove-volume
 
-add-host:
-	sudo echo '127.0.0.1 kkohki.42.fr' >> /etc/hosts
-
 make-volume-dir:
 	sudo mkdir -p /home/kkohki/data/wordpress
 	sudo mkdir -p /home/kkohki/data/mysql
