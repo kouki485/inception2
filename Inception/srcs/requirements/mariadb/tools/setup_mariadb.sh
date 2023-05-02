@@ -10,3 +10,5 @@ if [ ! -d "/var/lib/mysql/wordpress" ]; then
 	service mysql stop
 fi
 mysqld --bind-address=0.0.0.0
+
+
