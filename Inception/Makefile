@@ -33,3 +33,5 @@ build:
 	- docker-compose -f ./srcs/docker-compose.yml build --no-cache
 
 .PHONY: all start stop rebuild  make-volume-dir remove  n-volume build re
+
+#  https://localhost/wp-admin
